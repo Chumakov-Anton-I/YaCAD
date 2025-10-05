@@ -13,7 +13,9 @@
 #include <QToolBar>
 #include <QAction>
 #include <QCursor>
-//#include <QGLWidget>  // use QT += opengl to enable the OpenGL support
+#ifdef ENABLE_HARDWARE_ACCELERATION
+# include <QOpenGLWidget>
+#endif
 
 DrawingWidget::DrawingWidget(QWidget *parent)
     : QWidget(parent)
@@ -47,7 +49,7 @@ DrawingWidget::DrawingWidget(QWidget *parent)
     // Viewport
     m_view = new CustomView;
 #ifdef ENABLE_HARDWARE_ACCELERATION
-    m_view->setViewport(new QGLWidget);
+    m_view->setViewport(new QOpenGLWidget);
 #endif
     m_view->setScene(m_scene);
     //m_view->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);

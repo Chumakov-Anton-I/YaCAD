@@ -15,6 +15,10 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
     find_package(Qt6 REQUIRED COMPONENTS Widgets)
+    if (USE_HARDWARE_ACCELERATION)
+        find_package(Qt6 REQUIRED COMPONENTS OpenGLWidgets)
+        add_definitions(-DUSE_HARDWARE_ACCELERATION)
+    endif()
 
     qt_add_executable(yacad MANUAL_FINALIZATION
         main.cpp
@@ -35,6 +39,9 @@ endif()
 target_link_libraries(yacad PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 target_link_libraries(yacad PRIVATE Qt6::Core Qt6::Widgets)
 target_link_libraries(yacad PRIVATE Qt6::Widgets)
+if (USE_HARDWARE_ACCELERATION)
+    target_link_libraries(yacad PRIVATE Qt6::OpenGLWidgets)
+endif()
 
 include(GNUInstallDirs)
 install(TARGETS yacad
