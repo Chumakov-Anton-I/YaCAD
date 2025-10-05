@@ -1,10 +1,11 @@
 /* DrawingWidget implementation */
 
 #include "DrawingWidget.h"
-#include "DialogPanel.h"
-#include "dialogTrackMouse.h"
 #include "CustomScene.h"
 #include "CustomView.h"
+#include "DialogPanel.h"
+#include "dialogTrackMouse.h"
+#include "dialogDrawPoint.h"
 
 #include <QBoxLayout>
 #include <QSplitter>
@@ -68,6 +69,10 @@ void DrawingWidget::makeActions()
     m_actTrackMouse = new QAction(tr("Track mouse"), this);
     //m_actTrackMouse->setIcon(...);
     connect(m_actTrackMouse, &QAction::triggered, this, &DrawingWidget::trackMouse);
+
+    m_actDrawDot = new QAction(tr("Point"), this);
+    //m_actDrawDot->setIcon(...);
+    connect(m_actDrawDot, &QAction::triggered, this, &DrawingWidget::drawDot);
 }
 
 void DrawingWidget::makeToolBar()
@@ -75,10 +80,17 @@ void DrawingWidget::makeToolBar()
     m_mainToolbar = new QToolBar("Drawing");
     m_ribbon->addWidget(m_mainToolbar);
     m_mainToolbar->addAction(m_actTrackMouse);
+    m_mainToolbar->addAction(m_actDrawDot);
 }
 
 void DrawingWidget::trackMouse()
 {
     DialogTrackMouse *dialog = new DialogTrackMouse(this);
     showDialog(dialog);
+}
+
+void DrawingWidget::drawDot()
+{
+    DialogDrawPoint *dialog = new DialogDrawPoint(m_scene, this);
+    showDialog(dialog);    // probably here we should implement the move semantics
 }

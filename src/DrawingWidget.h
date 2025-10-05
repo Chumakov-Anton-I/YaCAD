@@ -35,12 +35,14 @@ private:
     QToolBar *m_mainToolbar;
 
     QAction *m_actTrackMouse;
+    QAction *m_actDrawDot;
 
     void makeActions();
     void makeToolBar();
 
 private slots:
     void trackMouse();
+    void drawDot();
 };
 
 #endif // DRAWINGWIDGET_H
