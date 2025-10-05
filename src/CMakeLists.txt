@@ -25,6 +25,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         dialogTrackMouse.h dialogTrackMouse.cpp
         DotGraphicsItem.h DotGraphicsItem.cpp
         dialogDrawPoint.h dialogDrawPoint.cpp
+        dialogDrawLineSegment.h dialogDrawLineSegment.cpp
+        LineSegmentItem.h LineSegmentItem.cpp
         DrawingWidget.h DrawingWidget.cpp
         MouseGizmo.h MouseGizmo.cpp
     )

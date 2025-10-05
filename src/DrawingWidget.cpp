@@ -6,6 +6,7 @@
 #include "DialogPanel.h"
 #include "dialogTrackMouse.h"
 #include "dialogDrawPoint.h"
+#include "dialogDrawLineSegment.h"
 
 #include <QBoxLayout>
 #include <QSplitter>
@@ -73,6 +74,10 @@ void DrawingWidget::makeActions()
     m_actDrawDot = new QAction(tr("Point"), this);
     //m_actDrawDot->setIcon(...);
     connect(m_actDrawDot, &QAction::triggered, this, &DrawingWidget::drawDot);
+
+    m_actDrawLineSegment = new QAction(tr("Line segment"), this);
+    //m_actDrawLineSegment->setIcon(...);
+    connect(m_actDrawLineSegment, &QAction::triggered, this, &DrawingWidget::drawLineSegment);
 }
 
 void DrawingWidget::makeToolBar()
@@ -81,6 +86,7 @@ void DrawingWidget::makeToolBar()
     m_ribbon->addWidget(m_mainToolbar);
     m_mainToolbar->addAction(m_actTrackMouse);
     m_mainToolbar->addAction(m_actDrawDot);
+    m_mainToolbar->addAction(m_actDrawLineSegment);
 }
 
 void DrawingWidget::trackMouse()
@@ -93,4 +99,10 @@ void DrawingWidget::drawDot()
 {
     DialogDrawPoint *dialog = new DialogDrawPoint(m_scene, this);
     showDialog(dialog);    // probably here we should implement the move semantics
+}
+
+void DrawingWidget::drawLineSegment()
+{
+    auto *dialog = new DialogDrawLineSegment(m_scene, this);
+    showDialog(dialog);
 }

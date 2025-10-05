@@ -36,6 +36,7 @@ private:
 
     QAction *m_actTrackMouse;
     QAction *m_actDrawDot;
+    QAction *m_actDrawLineSegment;
 
     void makeActions();
     void makeToolBar();
@@ -43,6 +44,7 @@ private:
 private slots:
     void trackMouse();
     void drawDot();
+    void drawLineSegment();
 };
 
 #endif // DRAWINGWIDGET_H
