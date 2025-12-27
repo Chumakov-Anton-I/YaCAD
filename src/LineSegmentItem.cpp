@@ -79,13 +79,13 @@ void LineSegmentItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
         m_pen.setWidth(2);
     } else if (m_editMode) {
         m_pen.setColor(Qt::black);
-        m_pen.setWidth(1);
+        m_pen.setCosmetic(true);
     } else {
         m_pen.setColor(Qt::black);
         m_pen.setWidth(2);
     }
     painter->setPen(m_pen);
-    painter->drawLine(QPointF(), m_V2 - m_V1);
+    painter->drawLine(QPointF(), mapFromScene(m_V2));
 }
 
 void LineSegmentItem::updateItem()

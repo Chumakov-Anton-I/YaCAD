@@ -50,56 +50,19 @@ DialogDrawLineSegment::DialogDrawLineSegment(CustomScene *scene, QWidget *parent
 bool DialogDrawLineSegment::eventFilter(QObject *watched, QEvent *event)
 {
     Q_UNUSED(watched)
-    if (event->type() == QEvent::GraphicsSceneMouseMove)
-    {
-        auto *mevent = static_cast<QGraphicsSceneMouseEvent *>(event);
-        if (!position1fixed) {
-            QPointF pos1 = mevent->scenePos();
-            X1 = pos1.x();
-            Y1 = pos1.y();
-            m_X1box->setValue(X1);
-            m_Y1box->setValue(Y1);
-        } else {
-            QPointF pos2 = mevent->scenePos();
-            X2 = pos2.x();
-            Y2 = pos2.y();
-            m_X2box->setValue(X2);
-            m_Y2box->setValue(Y2);
-            m_newItem->setV2(pos2);
-            m_scene->update();
-        }
-    }
-    else if (event->type() == QEvent::GraphicsSceneHoverEnter)
-    {
+    switch (event->type()) {
+    case QEvent::GraphicsSceneMouseMove:
+        onMouseMove(event);
+        return true;
+    case QEvent::GraphicsSceneMousePress:
+        onMousePress(event);
+        return true;
+    case QEvent::GraphicsSceneHoverEnter:
         //
+        return true;
+    default:
+        return false;
     }
-    else if (event->type() == QEvent::GraphicsSceneMousePress)
-    {
-        auto *mevent = static_cast<QGraphicsSceneMouseEvent *>(event);
-        QPointF p = mevent->buttonDownScenePos(Qt::LeftButton);
-        if (!position1fixed) {
-            X1 = p.x();
-            Y1 = p.y();
-            m_X1box->setValue(X1);
-            m_Y1box->setValue(Y1);
-            m_newItem->setPos(p);
-            position1fixed = true;
-            return true;
-        } else {
-            X2 = p.x();
-            Y2 = p.y();
-            m_X2box->setValue(X2);
-            m_Y2box->setValue(Y2);
-            m_newItem->setV2(p);
-            position2fixed = true;
-            makeLineSegment();
-            return true;
-        }
-    }
-    else {
-        // other cases
-    }
-    return false;
 }
 
 void DialogDrawLineSegment::accept()
@@ -129,4 +92,51 @@ bool DialogDrawLineSegment::makeLineSegment()
     X1 = 0.0; Y1 = 0.0;
     X2 = 0.0; Y2 = 0.0;
     return true;
+}
+
+void DialogDrawLineSegment::onMousePress(QEvent *event)
+{
+    auto *mevent = static_cast<QGraphicsSceneMouseEvent *>(event);
+    QPointF p = mevent->buttonDownScenePos(Qt::LeftButton);
+    if (!position1fixed) {
+        X1 = p.x();
+        Y1 = p.y();
+        m_X1box->setValue(X1);
+        m_Y1box->setValue(Y1);
+        m_newItem->setPos(p);
+        position1fixed = true;
+    } else {
+        X2 = p.x();
+        Y2 = p.y();
+        m_X2box->setValue(X2);
+        m_Y2box->setValue(Y2);
+        m_newItem->setV2(p);
+        position2fixed = true;
+        makeLineSegment();
+    }
+}
+
+void DialogDrawLineSegment::onMouseMove(QEvent *event)
+{
+    auto *mevent = static_cast<QGraphicsSceneMouseEvent *>(event);
+    if (!position1fixed) {
+        QPointF pos1 = mevent->scenePos();
+        X1 = pos1.x();
+        Y1 = pos1.y();
+        m_X1box->setValue(X1);
+        m_Y1box->setValue(Y1);
+    } else {
+        QPointF pos2 = mevent->scenePos();
+        X2 = pos2.x();
+        Y2 = pos2.y();
+        m_X2box->setValue(X2);
+        m_Y2box->setValue(Y2);
+        m_newItem->setV2(pos2);
+        m_scene->update();
+    }
+}
+
+void DialogDrawLineSegment::onMouseRelease(QEvent *event)
+{
+    //
 }

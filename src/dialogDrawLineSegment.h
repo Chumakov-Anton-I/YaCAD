@@ -34,6 +34,10 @@ private:
     bool position2fixed = false;
 
     bool makeLineSegment();
+
+    void onMousePress(QEvent *event);
+    void onMouseMove(QEvent *event);
+    void onMouseRelease(QEvent *event);
 };
 
 #endif // DIALOGDRAWLINESEGMENT_H
