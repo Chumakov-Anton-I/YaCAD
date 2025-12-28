@@ -15,6 +15,15 @@ void CustomScene::setEditingMode(bool on)
     m_gizmo->setVisible(on);  // it's annoying
 }
 
+void CustomScene::removeSelected()
+{
+    QList<QGraphicsItem *> selected = selectedItems();
+    for (auto it = selected.begin(); it != selected.end(); ++it) {
+        removeItem(*it);
+        delete *it;
+    }
+}
+
 void CustomScene::initScene()
 {
     m_gizmo = new MouseGizmo;

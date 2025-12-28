@@ -15,6 +15,9 @@ public:
     /// Set/reset the editing mode of the scene
     void setEditingMode(bool on);
 
+public slots:
+    void removeSelected();
+
 private:
     MouseGizmo *m_gizmo;
     bool m_editingMode = false;

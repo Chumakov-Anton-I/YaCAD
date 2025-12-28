@@ -13,6 +13,7 @@
 #include <QToolBar>
 #include <QAction>
 #include <QCursor>
+#include <QKeyEvent>
 #ifdef ENABLE_HARDWARE_ACCELERATION
 # include <QOpenGLWidget>
 #endif
@@ -89,6 +90,17 @@ void DrawingWidget::makeToolBar()
     m_mainToolbar->addAction(m_actTrackMouse);
     m_mainToolbar->addAction(m_actDrawDot);
     m_mainToolbar->addAction(m_actDrawLineSegment);
+}
+
+void DrawingWidget::keyPressEvent(QKeyEvent *event)
+{
+    switch (event->key()) {
+    case Qt::Key_Delete:
+        m_scene->removeSelected();
+        break;
+    default:
+        break;
+    }
 }
 
 void DrawingWidget::trackMouse()

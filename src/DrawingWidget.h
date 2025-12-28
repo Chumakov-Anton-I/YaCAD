@@ -41,6 +41,9 @@ private:
     void makeActions();
     void makeToolBar();
 
+protected:
+    void keyPressEvent(QKeyEvent *event);
+
 private slots:
     void trackMouse();
     void drawDot();
