@@ -14,11 +14,66 @@ This is a test version. I want to try my ideas. Then I will develop a more advan
 
 ## Building
 
-Under development...
+### Requirements
+Before building make sure you have CMake version 3.16 or newer and Qt Toolkit 6.8 or newer.
+Older versions of Qt can be used but they were not tested.
+
+### Dependencies
+The current version of the project does not depend on other frameworks or libraries except Qt.
+
+### Build the project
+Clone the repository
+```
+git clone git@github.com:Chumakov-Anton-I/YaCAD.git
+```
+or
+```
+https://github.com/Chumakov-Anton-I/YaCAD.git
+```
+on your computer.
+> [!NOTE]
+> You can also use QtCreator to open the project and build it.
+
+Now build the application
+```
+cd YaCAD
+cmake -S . -B <build-tree>
+cmake --build <build-tree>
+```
+> [!WARNING]
+> Type your path to `<build-tree>`. We recommend to use *out-of-tree* building.
+
+> [!WARNING]
+> If you are a Windows user, open the special prepared for Qt command line. This can be done on the Start menu.
 
 ## Using
 
-Under development...
+> [!WARNING]
+> The project is really raw, and does not have even the minimal set of necessary features.
+
+Just start the `yacad.exe` file in your build directory (`<build-tree>`).
+
+## Development notes
+
+To simplify the development use these labels in commit messages:
+
+| Label   | Description                                            |
+|---------|--------------------------------------------------------|
+| Build   | Project building or dependencies changing              |
+| Docs    | Documentation updating                                 |
+| Feature | New features                                           |
+| BugFix  | Bug fixing                                             |
+| Perf    | Perfomance improving                                   |
+| Refact  | Code editing without bug fixing or adding new features |
+| Revert  | Reverting to old commits                               |
+| Test    | Tests adding                                           |
+| Ressrc  | Resources adding (icons, images etc.)                  |
+| Other   | Other small changing                                   |
+
+Example:
+```
+git commit -m "Other: update README.md"
+```
 
 ## Other
 
