@@ -22,6 +22,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
 
     qt_add_executable(yacad MANUAL_FINALIZATION
         src/main.cpp
+        src/definitions.h
         src/CustomScene.h src/CustomScene.cpp
         src/CustomView.h src/CustomView.cpp
         src/BasePropertyDialog.h
