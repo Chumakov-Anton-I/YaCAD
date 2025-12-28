@@ -81,8 +81,8 @@ void LineSegmentItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
         m_pen.setColor(Qt::black);
         m_pen.setCosmetic(true);
     } else {
-        m_pen.setColor(Qt::black);
-        m_pen.setWidth(2);
+        m_pen.setColor(Qt::blue);
+        m_pen.setWidth(3);
     }
     painter->setPen(m_pen);
     painter->drawLine(QPointF(), mapFromScene(m_V2));
@@ -103,4 +103,5 @@ void LineSegmentItem::initItem(QPointF V1, QPointF V2, int style)
     m_length = 0.0;
     m_angle = 0.0;
     m_style = style;
+    setFlag(ItemIsSelectable);
 }

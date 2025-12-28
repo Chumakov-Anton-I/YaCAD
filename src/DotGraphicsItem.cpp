@@ -1,6 +1,7 @@
 /* DotGraphicsItem implementation */
 
 #include "DotGraphicsItem.h"
+#include "HotSpot.h"
 
 #include <QPainter>
 
@@ -27,19 +28,24 @@ void DotGraphicsItem::paint(QPainter *painter,
 {
     Q_UNUSED(option)
     Q_UNUSED(widget)
-    painter->setPen(Qt::NoPen);
     if (isSelected())
-        painter->setBrush(Qt::green);
-    else
+        m_hotSpot->setVisible(true);
+    else {
+        m_hotSpot->setVisible(false);
+        painter->save();
+        painter->setPen(Qt::NoPen);
         painter->setBrush(Qt::black);
-    painter->drawEllipse(QPointF(), m_size/2.0, m_size/2.0);
+        painter->drawEllipse(QPointF(), m_size/2.0, m_size/2.0);
+        painter->restore();
+    }
 }
 
 void DotGraphicsItem::initItem(double x, double y, int style)
 {
     Q_UNUSED(style)
 
-    setFlags(ItemIsMovable | ItemIsSelectable);
+    setFlags(/*ItemIsMovable |*/ ItemIsSelectable);
     setPos(x, y);
     m_size = 4.0;
+    m_hotSpot = new HotSpot(QPointF(), this);
 }

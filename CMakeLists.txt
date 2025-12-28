@@ -33,7 +33,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         src/LineSegmentItem.h src/LineSegmentItem.cpp
         src/DrawingWidget.h src/DrawingWidget.cpp
         src/MouseGizmo.h src/MouseGizmo.cpp
+        src/HotSpot.h src/HotSpot.cpp
     )
+else()
+    message(FATAL_ERROR "Your Qt version too old")
 endif()
 
 target_link_libraries(yacad PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)

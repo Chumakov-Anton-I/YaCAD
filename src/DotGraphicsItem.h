@@ -3,6 +3,8 @@
 
 #include <QGraphicsItem>
 
+class HotSpot;
+
 class DotGraphicsItem : public QGraphicsItem
 {
 public:
@@ -10,7 +12,7 @@ public:
     //enum DotStyle { Unknown = -1, DotRound, DotCross, DotXCross, DotRing };
     explicit DotGraphicsItem(QGraphicsItem *parent = nullptr);
     DotGraphicsItem(double x, double y, QGraphicsItem *parent = nullptr);
-    virtual ~DotGraphicsItem() {}
+    ~DotGraphicsItem() {}
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
@@ -19,6 +21,7 @@ public:
 
 private:
     double m_size;
+    HotSpot *m_hotSpot;
     int m_style;
     void initItem(double x = 0.0, double y = 0.0, int style = 0);
 };
